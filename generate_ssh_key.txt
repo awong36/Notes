@@ -1,0 +1,7 @@
+ssh-add
+
+ssh-agent -s
+or
+ssh-add -l -E md5
+
+cat ~/.ssh/id_rsa.pub
