@@ -1,0 +1,15 @@
+apt-get update
+apt-get upgrade
+apt-get install ntp
+apt-get install cython
+apt-get install usbmount
+apt-get install dos2unix
+apt-get install lsof
+mv /etc/localtime /etc/localtime.old
+ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+pip install minimalmodbus
+pip install modbus-tk
+
+apt-get -y install lxde lxde-core lxde-icon-theme
+apt-get install x11vnc
+x11vnc -bg -o %HOME/.x11vnc.log.%VNCDISPLAY -auth /var/run/lightdm/root/:0 -forever
