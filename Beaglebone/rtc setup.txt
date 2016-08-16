@@ -1,0 +1,31 @@
+i2cdetect -y -r 1
+echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
+hwclock -r -f /dev/rtc1
+ntpdate -b -s -u pool.ntp.org
+date
+hwclock -w -f /dev/rtc1
+hwclock -r -f /dev/rtc1
+mkdir /usr/share/rtc_ds1307
+nano /usr/share/rtc_ds1307/clock_init.sh
+
+#!/bin/bash
+sleep 15
+echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
+hwclock -s -f /dev/rtc1
+hwclock -w
+
+nano /lib/systemd/system/rtc-ds1307.service
+
+[Unit]
+Description=DS1307 RTC Service
+[Service]
+Type=simple
+WorkingDirectory=/usr/share/rtc_ds1307
+ExecStart=/bin/bash clock_init.sh
+SyslogIdentifier=rtc_ds1307
+[Install]
+WantedBy=multi-user.target
+
+systemctl enable rtc-ds1307.service
+systemctl start rtc-ds1307.service
+shutdown -r now

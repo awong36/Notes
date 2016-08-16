@@ -1,0 +1,59 @@
+
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+PYTHONPATH=/project/cycler2.1/
+@reboot ntpdate 10.100.1.24
+@reboot lsusb -v
+@reboot cd /project/cycler2.1/ && python /project/cycler2.1/cycler2.1.py &
+* */1 * * * cp /project/cycler2.1/error.csv /project/backup/
+* */1 * * * cp /project/cycler2.1/errorlog.csv /project/backup/
+* */1 * * * cp /project/cycler2.1/totalCycle.csv /project/backup/
+
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+PYTHONPATH=/project/datalogger2.0/
+@reboot lsusb -v
+@reboot cd /project/datalogger2.0/ && python /project/datalogger2.0/datalogger2.1.py &
+* */1 * * * cp /project/datalogger2.0/logger1.csv /project/backup/
+* */1 * * * cp /project/datalogger2.0/logger2.csv /project/backup/
+* */1 * * * cp /project/datalogger2.0/logger3.csv /project/backup/
+* */1 * * * cp /project/datalogger2.0/logger4.csv /project/backup/
+* */1 * * * cp /project/datalogger2.0/logger5.csv /project/backup/
+
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+PYTHONPATH=/project/datalogger/
+@reboot lsusb -v
+@reboot cd /project/datalogger && ./loggerOn.sh &
+@reboot cd /project/datalogger/ && python /project/datalogger/datalogger.py &
+* */6 * * * cp /project/datalogger/loggerLeft.csv /project/backup/
+* */6 * * * cp /project/datalogger/loggerRight.csv /project/backup/
+* */6 * * * cp /project/datalogger/driftlog.csv /project/backup/
+* */6 * * * cp /project/datalogger/recordTimeLeft.csv /project/backup/
+* */6 * * * cp /project/datalogger/recordTimeRight.csv /project/backup/
+* */6 * * * cp /project/datalogger/estCount.csv /project/backup/
+
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+@reboot lsusb -v
+0 */10 * * * cd /project/datalogger/ && python /project/datalogger/datalogger.py &
+30 */1 * * * cd /project/datalogger/system/ && ./backupUSB.sh &
+
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+@reboot lsusb -v
+0 */1 * * * sleep 17; cd /project/datalogger/ && python /project/datalogger/datalogger.py &
+30 * * * * sleep 17; cd /project/datalogger/ && python /project/datalogger/datalogger.py &
+58 */3 * * * sleep 17; cd /project/datalogger/system/ && ./backupUSB.sh &
+25 20 * * 0-6 shutdown -r now
+
+@reboot source ~/.profile
+@reboot lsusb -v
+@reboot sleep 10
+@reboot sleep 17; python /project/PWMcontrol/start1.1_P9.py &
+@reboot sleep 17; python /project/PWMcontrol/start1.1_P8.py &
+0 */1 * * * sleep 17; cd /project/datalogger/ && python /project/datalogger/datalogger.py &
+0 */2 * * * sleep 17; ./project/datalogger/system/backupUSB.sh &
+25 20 * * 0-6 shutdown -r now
+
+
+To view running task
+>ps aux | grep /project/cycler2.1/cycler2.1.py
+
+kill task
+>sudo kill [task number]
