@@ -1,0 +1,18 @@
+Pearl Cycler IP
+config:
+netmask 255.255.255.0
+gateway 192.168.2.1
+
+
+Logger1 - 192.168.2.181
+Control - 192.168.2.178
+
+Logger2 - 192.168.2.180
+Control2 - 192.168.2.179
+
+archive logs to /media/usb0
+./project/cycler3.1/system/backupUSB_cycler.sh
+./project/datalogger2.7/system/backupUSB.sh
+
+
+ 
