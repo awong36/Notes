@@ -1,0 +1,26 @@
+nano /etc/network/interfaces
+
+auto wlan0
+iface wlan0 inet dhcp
+wpa-ssid {ssid}
+wpa-psk {password}
+
+
+ifdown wlan0
+ifup wlan0
+ 
+root@beaglebone:~# ifconfig wlan0
+
+
+
+static IP address configuration:
+
+auto wlan0
+#iface wlan0 inet dhcp
+iface wlan0 inet static
+address 192.168.0.222
+netmask 255.255.255.0
+gateway 192.168.0.1
+wpa-ssid {ssid}
+wpa-psk {password}
+
