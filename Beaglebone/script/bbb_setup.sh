@@ -16,3 +16,4 @@ echo "=========== Python Library Setup ==========="
 pip install minimalmodbus
 pip install modbus-tk
 pip install python-can
+pip install boto3
