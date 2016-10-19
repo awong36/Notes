@@ -16,3 +16,12 @@ or
 ssh-add -l -E md5
 
 cat ~/.ssh/id_rsa.pub
+
+===================================
+ssh:
+
+git clone git@github.com:awong36/BBBpkg.git
+
+https:
+
+git clone https://github.com/awong36/BBBpkg.git
