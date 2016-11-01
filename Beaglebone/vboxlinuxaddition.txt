@@ -1,0 +1,2 @@
+run apt-get install build-essential
+then run sh VBoxLinuxAdditions.run in /media/cdrom0/
