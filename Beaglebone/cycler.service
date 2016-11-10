@@ -1,0 +1,13 @@
+[unit]
+Description=Cycler
+
+[Service]
+WorkingDirectory=/
+ExecStart=/project/cycler5.0/main.py
+SyslogIdentifier=Cycler
+KillMode=process
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
