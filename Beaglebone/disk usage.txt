@@ -1,7 +1,12 @@
 check disk space
 df
-
 df -h
+
+check running process on hold files 
+
+lsof | grep deleted
+lsof +L1 
+
 
 find large files
 cd /
@@ -14,3 +19,5 @@ truncate /var/log/daemon.log --size 1000
 truncate /var/log/daemon.log.1 --size 1000
 truncate /var/log/syslog --size 1000
 truncate /var/log/syslog.1 --size 1000
+
+
