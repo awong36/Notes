@@ -1,0 +1,51 @@
+<Command lines>
+
+vi /etc/wpa_supplicant/wpa.conf
+
+ctrl_interface=/run/wpa_supplicant
+update_config=1 
+ 
+wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa.conf
+ 
+wpa_passphrase testing50 123456789 > wpa.conf
+
+wpa_supplicant -B -i wlan0 -c <(wpa_passphrase testing50 123456789)
+ 
+wpa_supplicant -Dwext -iwlan0 -c/etc/wpa_supplicant/wpa.conf
+
+======================
+<wpa_supplicant.conf>
+
+ctrl_interface=/run/wpa_supplicant
+update_config=1
+ap_scan=1
+
+network={
+    ssid="testing50"
+    psk="123456789"
+}
+
+
+=======================
+<wpa_cli command lines>
+cp /media/usb0/wpa_supplicant.conf /etc/.
+wpa_cli
+scan
+scan_results
+add_network
+set_network 0 ssid "testing50"
+set_network 0 psk "123456789"
+enable_network 0
+save_config
+
+=======================
+<connmantctl command lines>
+connmanctl
+enable wifi
+scan wifi
+services
+agent on
+connect wifi_506583d4fc5e_544e434150413937414239_managed_psk
+Passphrase?
+quit
+ifconfig –a
